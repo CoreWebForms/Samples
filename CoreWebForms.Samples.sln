@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "eShop", "eShop", "{3D003C94-8C5E-4536-8BA3-A05F01EA44A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopFramework", "samples\eShop\eShopFramework.csproj", "{4416714A-9BB8-480B-95B3-C2599598E3EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.AspNetCore", "samples\eShop\eShop.AspNetCore.csproj", "{AAB9B537-BDDF-4C4A-998E-59E950F4F975}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4416714A-9BB8-480B-95B3-C2599598E3EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4416714A-9BB8-480B-95B3-C2599598E3EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4416714A-9BB8-480B-95B3-C2599598E3EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4416714A-9BB8-480B-95B3-C2599598E3EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB9B537-BDDF-4C4A-998E-59E950F4F975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB9B537-BDDF-4C4A-998E-59E950F4F975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB9B537-BDDF-4C4A-998E-59E950F4F975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB9B537-BDDF-4C4A-998E-59E950F4F975}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4416714A-9BB8-480B-95B3-C2599598E3EC} = {3D003C94-8C5E-4536-8BA3-A05F01EA44A2}
+		{AAB9B537-BDDF-4C4A-998E-59E950F4F975} = {3D003C94-8C5E-4536-8BA3-A05F01EA44A2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {170DF5FE-2C8F-42C6-BA63-1098388B65CD}
+	EndGlobalSection
+EndGlobal
