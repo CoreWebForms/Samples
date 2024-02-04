@@ -2,20 +2,15 @@
 using Autofac.Extensions.DependencyInjection;
 using eShopLegacyWebForms;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.SystemWebAdapters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System.IO;
-using System.Web.Optimization;
-using System.Web.UI.WebControls;
-using System.Web.UI;
-using WebForms.Compiler.Dynamic;
-using Microsoft.AspNetCore.SystemWebAdapters.Features;
-using Microsoft.AspNetCore.SystemWebAdapters;
 using System.Web;
-using Microsoft.AspNetCore.SystemWebAdapters.HttpHandlers;
-using System.Web.SessionState;
-using System.Threading.Tasks;
+using System.Web.Optimization;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 var builder = WebApplication.CreateBuilder(args);
 
