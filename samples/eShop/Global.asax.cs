@@ -53,11 +53,9 @@ namespace eShopLegacyWebForms
 
         protected void Application_Start(object sender, EventArgs e)
         {
-#if !NET
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-#endif
 
 #if !NET
             ConfigureContainer();
