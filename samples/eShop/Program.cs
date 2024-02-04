@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using eShopLegacyWebForms;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SystemWebAdapters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Web;
 using System.Web.Optimization;
+using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -39,9 +41,26 @@ builder.Services.AddSystemWebAdapters()
 
 var app = builder.Build();
 
-app.UseStaticFiles(new StaticFileOptions
+foreach (var staticPath in new[] { "Content", "images", "Pics" })
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "images")),
+    app.UseStaticFiles(new StaticFileOptions()
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, staticPath)),
+        RequestPath = "/" + staticPath,
+    });
+}
+
+// Probably should add this as a default or ability to opt in as it was automatic in WebForms
+app.Services.GetRequiredService<IHostApplicationLifetime>().ApplicationStarted.Register(() =>
+{
+    RouteTable.Routes.MapPageRoute("MainPage", "/", "~/Default.aspx");
+});
+
+// Post back seems to require this for now...
+app.Use((ctx, next) =>
+{
+    ctx.Features.GetRequiredFeature<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+    return next(ctx);
 });
 
 // We used property injection in ASP.NET Framework, so let's force it to do so for handlers (the only place we need them)
