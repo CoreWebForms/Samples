@@ -41,7 +41,7 @@ builder.Services.AddSystemWebAdapters()
 
 var app = builder.Build();
 
-foreach (var staticPath in new[] { "Content", "images", "Pics" })
+foreach (var staticPath in new[] { "Content", "images", "Pics", "fonts" })
 {
     app.UseStaticFiles(new StaticFileOptions()
     {
