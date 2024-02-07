@@ -56,13 +56,6 @@ app.Services.GetRequiredService<IHostApplicationLifetime>().ApplicationStarted.R
     RouteTable.Routes.MapPageRoute("MainPage", "/", "~/Default.aspx");
 });
 
-// Post back seems to require this for now...
-app.Use((ctx, next) =>
-{
-    ctx.Features.GetRequiredFeature<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-    return next(ctx);
-});
-
 // We used property injection in ASP.NET Framework, so let's force it to do so for handlers (the only place we need them)
 app.Use((ctx, next) =>
 {
