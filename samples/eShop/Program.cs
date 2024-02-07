@@ -2,7 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using eShopLegacyWebForms;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SystemWebAdapters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -26,9 +25,6 @@ builder.Host.ConfigureContainer<ContainerBuilder>((ctx, builder) =>
 builder.Services.AddDataProtection();
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
-
-// Load System.Drawing
-_ = typeof(System.Drawing.Bitmap);
 
 builder.Services.AddSystemWebAdapters()
     .AddWrappedAspNetCoreSession()
