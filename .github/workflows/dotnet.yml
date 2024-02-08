@@ -1,0 +1,20 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+    - name: Restore dependencies
+      run: dotnet restore CoreWebForms.Samples.Core.slnf
+    - name: Build
+      run: dotnet build CoreWebForms.Samples.Core.slnf -c Release --no-restore

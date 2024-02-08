@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "CoreWebForms.Samples.sln",
+    "projects": [
+      "samples\\eShop\\eShop.AspNetCore.csproj"
+    ]
+  }
+}

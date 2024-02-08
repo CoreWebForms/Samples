@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Autofac.Integration.Web;
 using eShopLegacyWebForms.Models;
 using eShopLegacyWebForms.Models.Infrastructure;
 using eShopLegacyWebForms.Modules;
@@ -12,12 +11,18 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+#if NET
+using Microsoft.AspNetCore.Hosting;
+#else
+using Autofac.Integration.Web;
+#endif
+
 namespace eShopLegacyWebForms
 {
-    public class Global : HttpApplication, IContainerProviderAccessor
+    // Can probably clean this kind of sharing up once HttpRuntime.WebObjectActivator is available
+#if !NET
+    partial class Global : IContainerProviderAccessor, IServiceProvider
     {
-        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         static IContainerProvider _containerProvider;
         IContainer container;
 
@@ -26,12 +31,35 @@ namespace eShopLegacyWebForms
             get { return _containerProvider; }
         }
 
+        object IServiceProvider.GetService(Type serviceType) => container.Resolve(serviceType);
+
+        public IServiceProvider Services => this;
+    }
+#endif
+
+    public partial class Global : HttpApplication
+    {
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+#if NET
+        public Global(IServiceProvider services)
+        {
+            Services = services;
+        }
+
+        private IServiceProvider Services { get; }
+
+#endif
+
         protected void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+#if !NET
             ConfigureContainer();
+#endif
             ConfigDataBase();
         }
 
@@ -44,16 +72,26 @@ namespace eShopLegacyWebForms
             HttpContext.Current.Session["SessionStartTime"] = DateTime.Now;
         }
 
+
+#if !NET
         /// <summary>
         /// http://docs.autofac.org/en/latest/integration/webforms.html
         /// </summary>
         private void ConfigureContainer()
         {
             var builder = new ContainerBuilder();
-            var mockData = bool.Parse(ConfigurationManager.AppSettings["UseMockData"]);
-            builder.RegisterModule(new ApplicationModule(mockData));
+
+            ConfigureServices(builder);
+
             container = builder.Build();
             _containerProvider = new ContainerProvider(container);
+        }
+#endif
+
+        public static void ConfigureServices(ContainerBuilder builder)
+        {
+            var mockData = bool.Parse(ConfigurationManager.AppSettings["UseMockData"]);
+            builder.RegisterModule(new ApplicationModule(mockData));
         }
 
         private void ConfigDataBase()
@@ -62,7 +100,7 @@ namespace eShopLegacyWebForms
 
             if (!mockData)
             {
-                Database.SetInitializer<CatalogDBContext>(container.Resolve<CatalogDBInitializer>());
+                Database.SetInitializer<CatalogDBContext>((CatalogDBInitializer)Services.GetService(typeof(CatalogDBInitializer)));
             }
         }
 
