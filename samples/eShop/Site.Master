@@ -1,4 +1,4 @@
-﻿<%@ master language="C#" autoeventwireup="true" codebehind="Site.master.cs" inherits="eShopLegacyWebForms.SiteMaster" %>
+﻿<%@ master language="C#" autoeventwireup="true" codebehind="Site.Master.cs" inherits="eShopLegacyWebForms.SiteMaster" %>
 
 <!DOCTYPE html>
 
