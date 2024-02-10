@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
-    <!--<EnableRuntimeAspxCompilation>true</EnableRuntimeAspxCompilation>-->
+    <EnableRuntimeAspxCompilation>true</EnableRuntimeAspxCompilation>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
