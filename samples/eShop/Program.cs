@@ -28,12 +28,11 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSystemWebAdapters()
     .AddWrappedAspNetCoreSession()
+    .AddRouting(defaultPage: "~/Default.aspx")
     .AddHttpApplication<Global>()
     .AddWebForms()
-    .AddDynamicPages()
-    .AddPrefix<ScriptManager>("asp") // For WebForms.Extensions
-    .AddPrefix<ListView>("asp") // For WebForms.Extensions
-    .AddPrefix<BundleReference>("webopt"); // For WebForms.Optimization
+    .AddDynamicPages();
+
 
 var app = builder.Build();
 
@@ -45,12 +44,6 @@ foreach (var staticPath in new[] { "Content", "images", "Pics", "fonts" })
         RequestPath = "/" + staticPath,
     });
 }
-
-// Probably should add this as a default or ability to opt in as it was automatic in WebForms
-app.Services.GetRequiredService<IHostApplicationLifetime>().ApplicationStarted.Register(() =>
-{
-    RouteTable.Routes.MapPageRoute("MainPage", "/", "~/Default.aspx");
-});
 
 // We used property injection in ASP.NET Framework, so let's force it to do so for handlers (the only place we need them)
 app.Use((ctx, next) =>
