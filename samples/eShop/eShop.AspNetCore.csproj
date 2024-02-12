@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
-    <EnableRuntimeAspxCompilation>true</EnableRuntimeAspxCompilation>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -20,11 +19,6 @@
     <PackageReference Include="WebForms.ConfigurationManager" Version="0.2.0-ci0013" />
     <PackageReference Include="WebForms.Extensions" Version="0.2.0-ci0013" />
     <PackageReference Include="WebForms.Optimization" Version="0.2.0-ci0013" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="**/*.aspx.designer.*" />
-    <Compile Remove="**/*.ascx.cs" />
   </ItemGroup>
 
   <ItemGroup>
