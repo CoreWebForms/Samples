@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.AspNet.FriendlyUrls.Resolvers;
+//using Microsoft.AspNet.FriendlyUrls.Resolvers;
 
 namespace WingtipToys
 {
@@ -19,6 +19,7 @@ namespace WingtipToys
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            /* https://github.com/CoreWebForms/CoreWebForms/issues/16
             // Determine current view
             var isMobile = WebFormsFriendlyUrlResolver.IsMobileView(new HttpContextWrapper(Context));
             CurrentView = isMobile ? "Mobile" : "Desktop";
@@ -38,6 +39,7 @@ namespace WingtipToys
             var url = GetRouteUrl(switchViewRouteName, new { view = AlternateView, __FriendlyUrls_SwitchViews = true });
             url += "?ReturnUrl=" + HttpUtility.UrlEncode(Request.RawUrl);
             SwitchUrl = url;
+            */
         }
     }
 }

@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Routing;
-using Microsoft.AspNet.FriendlyUrls;
+//#if !NET
+//using Microsoft.AspNet.FriendlyUrls;//
+//#endif
 
 namespace WingtipToys
 {
@@ -10,11 +12,14 @@ namespace WingtipToys
     {
         public static void RegisterRoutes(System.Web.Routing.RouteCollection routes)
         {
+//#if !NET
+/*
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
-#if !NET
+
             routes.EnableFriendlyUrls(settings);
-#endif
+*/
+//#endif
         }
     }
 }
