@@ -2,6 +2,7 @@
   "solution": {
     "path": "CoreWebForms.Samples.sln",
     "projects": [
+      "samples\\WingTipToys\\src\\WingtipToys.AspNetCore.csproj",
       "samples\\eShop\\eShop.AspNetCore.csproj"
     ]
   }

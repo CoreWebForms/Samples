@@ -1,30 +1,31 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="CoreWebForms.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoWarn>NU1603</NoWarn>
+    <EnableRuntimeAspxCompilation>true</EnableRuntimeAspxCompilation>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.SystemWebAdapters.CoreServices" Version="1.3.2" />
-    <PackageReference Include="WebForms" Version="0.2.0-ci0016" />
-    <PackageReference Include="WebForms.Compiler" Version="0.2.0-ci0016">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="WebForms.Compiler.Dynamic" Version="0.2.0-ci0016" />
-    <PackageReference Include="WebForms.ConfigurationManager" Version="0.2.0-ci0016" />
-    <PackageReference Include="WebForms.Extensions" Version="0.2.0-ci0016" />
-    <PackageReference Include="WebForms.Optimization" Version="0.2.0-ci0016" />
+
+    <PackageReference Include="Microsoft.AspNet.ScriptManager.MSAjax" Version="5.0.0" GeneratePathProperty="true" CopyContent="true" NoWarn="NU1701" />
+    <PackageReference Include="AspNet.ScriptManager.bootstrap" Version="4.3.1" GeneratePathProperty="true" CopyContent="true" NoWarn="NU1701" />
+    <PackageReference Include="AspNet.ScriptManager.jQuery" Version="3.3.1" GeneratePathProperty="true" CopyContent="true" NoWarn="NU1701" />
+    <PackageReference Include="Modernizr" Version="2.8.3" CopyContent="true"  />
+    <PackageReference Include="bootstrap" Version="4.3.1" GeneratePathProperty="true" CopyContent="true" />
+    <PackageReference Include="jQuery" Version="3.5.0" GeneratePathProperty="true" CopyContent="true" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="images\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="images/**/*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content/site.css" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content/custom.css" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Pics/**/*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="fonts/**/*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

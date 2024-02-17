@@ -1,5 +1,8 @@
 {
   "sdk": {
-    "version": "8.0.101"
+    "version": "8.0.200"
+  },
+  "msbuild-sdks": {
+    "CoreWebForms.Sdk":  "0.2.1"
   }
 }

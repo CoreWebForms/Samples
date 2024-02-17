@@ -8,10 +8,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Web;
-using System.Web.Optimization;
-using System.Web.Routing;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,16 +23,18 @@ builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSystemWebAdapters()
+    .AddPreApplicationStartMethod()
     .AddWrappedAspNetCoreSession()
     .AddRouting(defaultPage: "~/Default.aspx")
     .AddHttpApplication<Global>()
     .AddWebForms()
+    .AddOptimization()
+    .AddScriptManager()
     .AddDynamicPages();
-
 
 var app = builder.Build();
 
-foreach (var staticPath in new[] { "Content", "images", "Pics", "fonts" })
+foreach (var staticPath in new[] { "Content", "images", "Pics", "fonts", "Scripts" })
 {
     app.UseStaticFiles(new StaticFileOptions()
     {
@@ -62,5 +60,7 @@ app.UseSession();
 app.UseSystemWebAdapters();
 
 app.MapWebForms();
+app.MapScriptManager();
+app.MapBundleTable();
 
 app.Run();

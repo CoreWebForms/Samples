@@ -1,7 +1,7 @@
-﻿<Project Sdk="CoreWebForms.Sdk/0.2.0-ci0044">
+﻿<Project Sdk="CoreWebForms.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableRuntimeAspxCompilation>true</EnableRuntimeAspxCompilation>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
