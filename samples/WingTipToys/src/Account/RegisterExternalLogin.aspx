@@ -7,7 +7,7 @@
         <div class="form-horizontal">
             <h4>Association Form</h4>
             <hr />
-            <asp:ValidationSummary runat="server" ShowModelStateErrors="true" CssClass="text-danger" />
+          <%-- https://github.com/CoreWebForms/CoreWebForms/issues/189 <asp:ValidationSummary runat="server" ShowModelStateErrors="true" CssClass="text-danger" /> --%>
             <p class="text-info">
                 You've authenticated with <strong><%: ProviderName %></strong>. Please enter a user name below for the current site
                 and click the Log in button.

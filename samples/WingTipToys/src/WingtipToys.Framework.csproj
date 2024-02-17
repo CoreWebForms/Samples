@@ -95,9 +95,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.1\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+    <!--<Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
-    </Reference>
+    </Reference>-->
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">

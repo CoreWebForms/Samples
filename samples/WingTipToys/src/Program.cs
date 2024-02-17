@@ -3,6 +3,7 @@ using System.Web.Optimization;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 using System.Web.Routing;
+using Microsoft.Extensions.FileProviders;
 
 namespace WingtipToys
 {
@@ -18,17 +19,33 @@ namespace WingtipToys
             builder.Services.AddSession();
             builder.Services.AddDistributedMemoryCache();
 
+
             builder.Services.AddSystemWebAdapters()
-            .AddWrappedAspNetCoreSession()
-            .AddHttpApplication<Global>()
-            .AddWebForms()
-            .AddDynamicPages()
-            .AddPrefix<ScriptManager>("asp") // For WebForms.Extensions
-            .AddPrefix<ListView>("asp") // For WebForms.Extensions
-            .AddPrefix<BundleReference>("webopt"); // For WebForms.Optimization
+                 .AddJsonSessionSerializer(options =>
+                 {
+                     // Serialization/deserialization requires each session key to be registered to a type
+                     options.RegisterKey<string>("CartId");
+                 })
+                .AddPreApplicationStartMethod(false)
+                .AddJsonSessionSerializer()
+                .AddHttpApplication<Global>()
+                .AddWrappedAspNetCoreSession()
+                .AddRouting()
+                .AddWebForms()
+                .AddScriptManager()
+                .AddDynamicPages();
+
 
             var app = builder.Build();
 
+            foreach (var staticPath in new[] { "Content", "images", "Catalog", "fonts", "Scripts" })
+            {
+                app.UseStaticFiles(new StaticFileOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, staticPath)),
+                    RequestPath = "/" + staticPath,
+                });
+            }
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

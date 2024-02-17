@@ -40,10 +40,13 @@ namespace WingtipToys
                     HttpOnly = true,
                     Value = _antiXsrfTokenValue
                 };
-                if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
+#if !NET 
+                // https://github.com/CoreWebForms/Samples/issues/10
+                // if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
                 {
                     responseCookie.Secure = true;
                 }
+#endif
                 Response.Cookies.Set(responseCookie);
             }
 
@@ -56,7 +59,10 @@ namespace WingtipToys
             {
                 // Set Anti-XSRF token
                 ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
-                ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
+#if !NET
+                //https://github.com/CoreWebForms/Samples/issues/10
+                // ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
+#endif
             }
             else
             {
@@ -95,7 +101,10 @@ namespace WingtipToys
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
-            Context.GetOwinContext().Authentication.SignOut();
+#if !NET
+            //https://github.com/CoreWebForms/Samples/issues/11
+            // Context.GetOwinContext().Authentication.SignOut();
+#endif
         }
     }
 

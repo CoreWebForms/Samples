@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Manage Account" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="WingtipToys.Account.Manage" %>
 
-<%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
+<%-- https://github.com/CoreWebForms/CoreWebForms/issues/19 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>--%>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
@@ -57,7 +57,7 @@
                 </asp:PlaceHolder>
 
                 <asp:PlaceHolder runat="server" ID="changePasswordHolder" Visible="false">
-                    <p>You're logged in as <strong><%: User.Identity.GetUserName() %></strong>.</p>
+                    <%--<p>You're logged in as <strong><%: User.Identity.GetUserName() %></strong>.</p>--%>
                     <div class="form-horizontal">
                         <h4>Change Password Form</h4>
                         <hr />
@@ -128,7 +128,7 @@
                     </ItemTemplate>
                 </asp:ListView>
 
-                <uc:OpenAuthProviders runat="server" ReturnUrl="~/Account/Manage" />
+               <%-- <uc:OpenAuthProviders runat="server" ReturnUrl="~/Account/Manage" />--%>
             </section>
 
         </div>
