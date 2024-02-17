@@ -22,16 +22,16 @@ namespace WingtipToys
 
             // Initialize the product database.
             Database.SetInitializer(new ProductDatabaseInitializer());
-
+#if !NET
             // Create the administrator role and user.
             RoleActions roleActions = new RoleActions();
             roleActions.createAdmin();
-
+#endif
             // Add Routes.
             RegisterCustomRoutes(RouteTable.Routes);
         }
 
-        void RegisterCustomRoutes(RouteCollection routes)
+        void RegisterCustomRoutes(System.Web.Routing.RouteCollection routes)
         {
           routes.MapPageRoute(
               "ProductsByCategoryRoute",

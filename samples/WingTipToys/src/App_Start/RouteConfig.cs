@@ -8,11 +8,13 @@ namespace WingtipToys
 {
     public static class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        public static void RegisterRoutes(System.Web.Routing.RouteCollection routes)
         {
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
+#if !NET
             routes.EnableFriendlyUrls(settings);
+#endif
         }
     }
 }

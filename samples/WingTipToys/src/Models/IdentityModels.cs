@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNet.Identity;
+﻿#if !NET
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+#endif
 using System.Web;
 using System;
 using WingtipToys.Models;
+using HttpContext = System.Web.HttpContext;
+using HttpRequest = System.Web.HttpRequest;
+using HttpResponse = System.Web.HttpResponse;
 
 namespace WingtipToys.Models
 {
     // You can add User data for the user by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+#if !NET
     public class ApplicationUser : IdentityUser
     {
     }
@@ -20,7 +26,7 @@ namespace WingtipToys.Models
         }
     }
 
-    #region Helpers
+
     public class UserManager : UserManager<ApplicationUser>
     {
         public UserManager()
@@ -28,7 +34,10 @@ namespace WingtipToys.Models
         {
         }
     }
+#endif
 }
+
+
 
 namespace WingtipToys
 {
@@ -36,7 +45,7 @@ namespace WingtipToys
     {
         // Used for XSRF when linking external logins
         public const string XsrfKey = "XsrfId";
-
+#if !NET
         public static void SignIn(UserManager manager, ApplicationUser user, bool isPersistent)
         {
             IAuthenticationManager authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
@@ -44,7 +53,7 @@ namespace WingtipToys
             var identity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
-
+#endif
         public const string ProviderNameKey = "providerName";
         public static string GetProviderNameFromRequest(HttpRequest request)
         {
@@ -73,5 +82,4 @@ namespace WingtipToys
             }
         }
     }
-    #endregion
 }
