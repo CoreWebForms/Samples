@@ -3,6 +3,6 @@
     "version": "8.0.200"
   },
   "msbuild-sdks": {
-    "CoreWebForms.Sdk":  "0.2.0"
+    "CoreWebForms.Sdk":  "0.2.1-ci0001"
   }
 }
