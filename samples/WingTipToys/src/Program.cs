@@ -38,7 +38,7 @@ namespace WingtipToys
 
             var app = builder.Build();
 
-            foreach (var staticPath in new[] { "Content", "images", "Catalog", "fonts", "Scripts" })
+            foreach (var staticPath in new[] { "Content", "Images", "Catalog", "fonts", "Scripts" })
             {
                 app.UseStaticFiles(new StaticFileOptions()
                 {
