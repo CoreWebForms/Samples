@@ -33,6 +33,7 @@ namespace WingtipToys
                 .AddRouting()
                 .AddWebForms()
                 .AddScriptManager()
+                .AddOptimization()
                 .AddDynamicPages();
 
 
@@ -72,8 +73,9 @@ namespace WingtipToys
                 RouteTable.Routes.MapPageRoute("MainPage", "/", "~/Default.aspx");
             });
 
-            app.MapWebForms();
             app.MapHttpHandlers();
+            app.MapScriptManager();
+            app.MapBundleTable();
 
             app.Run();
         }
