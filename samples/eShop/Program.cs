@@ -1,13 +1,17 @@
 ﻿using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using eShopLegacyWebForms;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SystemWebAdapters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using System.Reflection;
 using System.Web;
+using WebForms.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,11 +50,11 @@ foreach (var staticPath in new[] { "Content", "images", "Pics", "fonts", "Script
 // We used property injection in ASP.NET Framework, so let's force it to do so for handlers (the only place we need them)
 app.Use((ctx, next) =>
 {
-    if (ctx.AsSystemWeb().GetHandler() is { } handler)
+    if (ctx.AsSystemWeb().CurrentHandler is { } handler)
     {
         var scope = ctx.RequestServices.GetRequiredService<ILifetimeScope>();
 
-        scope.InjectUnsetProperties(handler);
+        scope.InjectProperties(handler, PropertySelector.Instance);
     }
 
     return next(ctx);
@@ -59,8 +63,16 @@ app.Use((ctx, next) =>
 app.UseSession();
 app.UseSystemWebAdapters();
 
-app.MapWebForms();
+app.MapHttpHandlers();
 app.MapScriptManager();
 app.MapBundleTable();
 
 app.Run();
+
+class PropertySelector : IPropertySelector
+{
+    public static IPropertySelector Instance { get; } = new PropertySelector();
+
+    public bool InjectProperty(PropertyInfo propertyInfo, object instance)
+        => propertyInfo.ReflectedType == instance.GetType();
+}

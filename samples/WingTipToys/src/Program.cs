@@ -33,6 +33,7 @@ namespace WingtipToys
                 .AddRouting()
                 .AddWebForms()
                 .AddScriptManager()
+                .AddOptimization()
                 .AddDynamicPages();
 
 
@@ -61,19 +62,14 @@ namespace WingtipToys
             app.UseSession();
             app.UseSystemWebAdapters();
 
-            app.MapGet("/acls", () => AssemblyLoadContext.All.Select(acl => new
-            {
-                Name = acl.Name,
-                Assemblies = acl.Assemblies.Select(a => a.FullName)
-            }));
-
             app.Services.GetRequiredService<IHostApplicationLifetime>().ApplicationStarted.Register(() =>
             {
                 RouteTable.Routes.MapPageRoute("MainPage", "/", "~/Default.aspx");
             });
 
-            app.MapWebForms();
             app.MapHttpHandlers();
+            app.MapScriptManager();
+            app.MapBundleTable();
 
             app.Run();
         }
