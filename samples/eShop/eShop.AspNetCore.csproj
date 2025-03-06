@@ -1,7 +1,7 @@
 ﻿<Project Sdk="CoreWebForms.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net9.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoWarn>NU1603</NoWarn>
     <EnableRuntimeAspxCompilation>true</EnableRuntimeAspxCompilation>
