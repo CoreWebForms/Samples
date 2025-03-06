@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SystemWebAdapters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Web;
@@ -28,6 +29,11 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSystemWebAdapters()
     .AddPreApplicationStartMethod()
+    .AddJsonSessionSerializer(options =>
+    {
+        options.RegisterKey<string>("MachineName");
+        options.RegisterKey<DateTime>("SessionStartTime");
+    })
     .AddWrappedAspNetCoreSession()
     .AddRouting(defaultPage: "~/Default.aspx")
     .AddHttpApplication<Global>()
