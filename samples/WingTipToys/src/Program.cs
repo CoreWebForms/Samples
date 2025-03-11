@@ -64,7 +64,7 @@ namespace WingtipToys
 
             app.Services.GetRequiredService<IHostApplicationLifetime>().ApplicationStarted.Register(() =>
             {
-                RouteTable.Routes.MapPageRoute("MainPage", "/", "~/Default.aspx");
+                RouteTable.Routes.MapPageRoute("Index", "Index", "~/Default.aspx");
             });
 
             app.MapHttpHandlers();
